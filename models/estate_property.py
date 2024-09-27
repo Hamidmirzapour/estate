@@ -7,7 +7,7 @@ class EstateProperty(models.Model):
     name = fields.Char(required=True)
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date()
+    date_availability = fields.Date(default=fields.Datetime.now)
     expected_price = fields.Float()
     selling_price = fields.Float()
     bedrooms = fields.Integer()
@@ -18,5 +18,7 @@ class EstateProperty(models.Model):
     garden_area = fields.Integer()
     garden_orientation = fields.Selection(
         selection=[("N", "North"), ("S", "South"), ("E", "East"), ("W", "West")],
-        string="Garden Orientation"
+        default="N", string="Garden Orientation"
     )
+    user_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
+    buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
