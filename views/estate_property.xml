@@ -56,6 +56,12 @@
                 <field name="name"/>
                 <field name="postcode"/>
                 <field name="bedrooms"/>
+                <filter name="postcode_set" string="PostCode is set" domain="[('postcode', '!=', False)]"/>
+                <separator/>
+                <filter name="north_garden" string="North garden" domain="[('garden_orientation', '=', 'N')]"/>
+                <filter name="south_garden" string="South garden" domain="[('garden_orientation', '=', 'S')]"/>
+                <filter name="east_garden" string="East garden" domain="[('garden_orientation', '=', 'E')]"/>
+                <filter name="west_garden" string="West garden" domain="[('garden_orientation', '=', 'W')]"/>
             </search>
         </field>
     </record>
