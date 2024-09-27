@@ -16,7 +16,10 @@
     'website': 'https://hamidmirzapour.ir',
     'depends': ['base'],
     'assets': {},
-    'data': [],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/menu.xml',
+    ],
     'demo': [],
     'license': 'LGPL-3',
     'installable': True,
