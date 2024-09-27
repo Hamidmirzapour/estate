@@ -9,7 +9,6 @@
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
-                <field name="selling_price"/>
                 <field name="bedrooms"/>
                 <field name="garage"/>
                 <field name="garden"/>
@@ -47,6 +46,17 @@
                     </notebook>
                 </sheet>
             </form>
+        </field>
+    </record>
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.view.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Estate Property Search">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="bedrooms"/>
+            </search>
         </field>
     </record>
 </odoo>
