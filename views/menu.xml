@@ -7,7 +7,7 @@
         <field name="view_mode">tree,form,kanban</field>
     </record>
 
-    <menuitem id="estate_menu_root" name="Estate Application">
+    <menuitem id="estate_menu_root" name="Real Estate" web_icon="estate,static/description/icon.png">
         <menuitem id="state_master_data_menu" name="Master Data">
             <menuitem id="estate_property_menu_action" action="estate_property_action"/>
         </menuitem>
