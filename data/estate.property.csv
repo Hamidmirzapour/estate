@@ -1,0 +1,7 @@
+id,name,state
+"estate_property_1","Demo Estate Property 1","new"
+"estate_property_2","Demo Estate Property 2","ready"
+"estate_property_3","Demo Estate Property 3","offer_received"
+"estate_property_4","Demo Estate Property 4","offer_accepted"
+"estate_property_5","Demo Estate Property 5","sold"
+"estate_property_6","Demo Estate Property 6","canceled"

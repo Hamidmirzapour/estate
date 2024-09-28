@@ -20,6 +20,7 @@
         'security/ir.model.access.csv',
         'views/menu.xml',
         'views/estate_property.xml',
+        'data/estate.property.csv',
     ],
     'demo': [],
     'license': 'LGPL-3',
