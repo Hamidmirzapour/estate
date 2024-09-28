@@ -1,5 +1,5 @@
 from odoo import models, fields, api
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -67,4 +67,13 @@ class EstateProperty(models.Model):
             raise ValidationError("sold estate property can not be canceled.")
         self.state = "canceled"
 
+    @api.model
+    def create(self, vals):
+        if vals.get("selling_price") and vals.get("date_availability"):
+            vals["state"] = "ready"
+        return super().create(vals)
 
+    def unlink(self):
+        if self.state not in ["new", "canceled"]:
+            raise UserError("Only estate properties with new or canceled state can be deleted.")
+        return super().unlink()
