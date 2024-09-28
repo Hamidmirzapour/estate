@@ -17,6 +17,7 @@ class EstateProperty(models.Model):
     garage = fields.Boolean()
     garden = fields.Boolean()
     garden_area = fields.Integer()
+    total_area = fields.Integer(compute="_compute_total_area", readonly=True)
     garden_orientation = fields.Selection(
         selection=[("N", "North"), ("S", "South"), ("E", "East"), ("W", "West")],
         default="N", string="Garden Orientation"
@@ -39,3 +40,9 @@ class EstateProperty(models.Model):
                 raise ValidationError("The expected price should be greater than 0.0")
             if rec.selling_price <= 0.0:
                 raise ValidationError("The selling price should be greater than 0.0")
+
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
+        for rec in self:
+            rec.total_area = rec.living_area + rec.garden_area
+

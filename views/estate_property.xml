@@ -34,7 +34,9 @@
                         <group>
                             <field name="garage"/>
                             <field name="garden"/>
+                            <field name="living_area"/>
                             <field name="garden_area"/>
+                            <field name="total_area"/>
                             <field name="garden_orientation"/>
                             <field name="date_availability"/>
                         </group>
