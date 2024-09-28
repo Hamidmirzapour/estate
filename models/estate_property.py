@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -22,3 +23,19 @@ class EstateProperty(models.Model):
     )
     user_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
     buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
+
+    _sql_constraints = [
+        (
+            'unique_name',
+            'UNIQUE(name)',
+            'The name field should be unique.',
+        )
+    ]
+
+    @api.constrains("expected_price", "selling_price")
+    def check_prices(self):
+        for rec in self:
+            if rec.expected_price <= 0.0:
+                raise ValidationError("The expected price should be greater than 0.0")
+            if rec.selling_price <= 0.0:
+                raise ValidationError("The selling price should be greater than 0.0")
