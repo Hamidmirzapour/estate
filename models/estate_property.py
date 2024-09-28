@@ -22,6 +22,17 @@ class EstateProperty(models.Model):
         selection=[("N", "North"), ("S", "South"), ("E", "East"), ("W", "West")],
         default="N", string="Garden Orientation"
     )
+    state = fields.Selection(
+        selection=[('new', 'New'),
+                   ('ready', 'Ready'),
+                   ('offer_received', 'Offer Received'),
+                   ('offer_accepted', 'Offer Accepted'),
+                   ('sold', 'Sold'),
+                   ('canceled', 'Canceled')],
+        string="Status",
+        default = "new",
+        required=True
+    )
     user_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
     buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
 
@@ -45,4 +56,15 @@ class EstateProperty(models.Model):
     def _compute_total_area(self):
         for rec in self:
             rec.total_area = rec.living_area + rec.garden_area
+
+    def action_sold(self):
+        if self.state == 'canceled':
+            raise ValidationError("Canceled estate property can not be sold.")
+        self.state = "sold"
+
+    def action_cancel(self):
+        if self.state == 'sold':
+            raise ValidationError("sold estate property can not be canceled.")
+        self.state = "canceled"
+
 
