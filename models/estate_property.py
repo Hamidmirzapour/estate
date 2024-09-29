@@ -1,5 +1,9 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError, UserError
+from datetime import datetime
+
+from setuptools.dist import sequence
+
 
 class EstateProperty(models.Model):
     _name = "estate.property"
@@ -66,6 +70,14 @@ class EstateProperty(models.Model):
         if self.state == 'sold':
             raise ValidationError("sold estate property can not be canceled.")
         self.state = "canceled"
+
+    def auto_update_state(self):
+        estate_properties = self.env["estate.property"].search([])
+        if estate_properties:
+            for ep in estate_properties:
+                if ep.date_availability:
+                    if datetime.today().date() > ep.date_availability and ep.state not in ["sold", "offer_received", "offer_accepted"]:
+                        ep.state = "canceled"
 
     @api.model
     def create(self, vals):

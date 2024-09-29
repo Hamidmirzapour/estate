@@ -21,6 +21,7 @@
         'views/menu.xml',
         'views/estate_property.xml',
         'data/estate.property.csv',
+        'data/estate_property_cron.xml',
     ],
     'demo': [],
     'license': 'LGPL-3',
