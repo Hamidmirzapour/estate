@@ -14,7 +14,7 @@
     'author': 'Hamid Mirzapour',
     'category': 'Estate',
     'website': 'https://hamidmirzapour.ir',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'assets': {},
     'data': [
         'security/ir.model.access.csv',
@@ -22,6 +22,7 @@
         'views/estate_property.xml',
         'data/estate.property.csv',
         'data/estate_property_cron.xml',
+        'data/mail_template_data.xml',
     ],
     'demo': [],
     'license': 'LGPL-3',

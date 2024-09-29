@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_estate_property" model="mail.template">
+            <field name="name">Estate Property: Send Congrats</field>
+            <field name="model_id" ref="estate.model_estate_property"/>
+            <field name="subject">Congrats to buy {{ object.name }})</field>
+            <field name="email_from">{{ (object.user_id.email_formatted) }}</field>
+            <field name="partner_to">{{ object.buyer_id.partner_id.id }}</field>
+            <field name="description">Used by admin to send email to buyer of estate property</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Hello,
+                        <br/><br/>
+                        Congrats to buy <span t-out="object.name"></span> with $ <span t-out="object.selling_price"></span>.
+                    </p>
+                </div>
+            </field>
+            <field name="report_template_ids" eval="[(4, ref('sale.action_report_saleorder'))]"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>

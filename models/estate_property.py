@@ -66,6 +66,10 @@ class EstateProperty(models.Model):
             raise ValidationError("Canceled estate property can not be sold.")
         self.state = "sold"
 
+        # send email
+        email_template = self.env.ref("estate.email_template_estate_property")
+        email_template.send_mail(self.id, force_send=True, email_values={})
+
     def action_cancel(self):
         if self.state == 'sold':
             raise ValidationError("sold estate property can not be canceled.")
