@@ -6,6 +6,7 @@
         <field name="arch" type="xml">
             <tree string="Estate Property List">
                 <field name="name"/>
+                <field name="estate_property_type_id"/>
                 <field name="postcode"/>
                 <field name="expected_price"/>
                 <field name="selling_price"/>
@@ -30,6 +31,7 @@
                 <sheet>
                     <group>
                         <group>
+                            <field name="estate_property_type_id" options="{'no_create': True, 'no_edit': True}"/>
                             <field name="name"/>
                             <field name="postcode"/>
                             <field name="expected_price"/>

@@ -2,9 +2,6 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError, UserError
 from datetime import datetime
 
-from setuptools.dist import sequence
-
-
 class EstateProperty(models.Model):
     _name = "estate.property"
     _description = "Estate Property"
@@ -39,6 +36,7 @@ class EstateProperty(models.Model):
     )
     user_id = fields.Many2one("res.users", string="Salesman", default=lambda self: self.env.user)
     buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
+    estate_property_type_id = fields.Many2one("estate.property.type", string="Estate Property Type", required=True)
 
     _sql_constraints = [
         (
