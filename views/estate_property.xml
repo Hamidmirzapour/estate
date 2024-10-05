@@ -13,6 +13,7 @@
                 <field name="bedrooms"/>
                 <field name="garage"/>
                 <field name="garden"/>
+                <field name="estate_property_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                 <field name="date_availability"/>
                 <field name="state"/>
             </tree>
@@ -38,6 +39,7 @@
                             <field name="selling_price"/>
                             <field name="facades"/>
                             <field name="bedrooms"/>
+                            <field name="estate_property_tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_quick_create': True}"/>
                         </group>
                         <group>
                             <field name="garage"/>
