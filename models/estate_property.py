@@ -38,7 +38,9 @@ class EstateProperty(models.Model):
     buyer_id = fields.Many2one("res.partner", string="Buyer", readonly=True, copy=False)
     estate_property_type_id = fields.Many2one("estate.property.type", string="Estate Property Type", required=True)
     estate_property_tag_ids = fields.Many2many("estate.property.tag", string="Tags")
+    estate_property_offer_ids = fields.One2many("estate.property.offer", "estate_property_id", string="Offers")
 
+    
     _sql_constraints = [
         (
             'unique_name',

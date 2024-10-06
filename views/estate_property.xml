@@ -65,6 +65,15 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Offers">
+                            <field name="estate_property_offer_ids">
+                                <tree string="Offers" editable="bottom">
+                                    <field name="partner_id" options="{'no_create': True, 'no_edit': True}"/>
+                                    <field name="price"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
