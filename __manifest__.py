@@ -21,6 +21,7 @@
         'views/menu.xml',
         'views/estate_property.xml',
         'views/estate_property_offer.xml',
+        'views/estate_property_report.xml',
         'data/estate.property.csv',
         'data/estate_property_cron.xml',
         'data/mail_template_data.xml',

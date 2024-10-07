@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <record id="estate_property_report" model="ir.actions.report">
+            <field name="name">Estate Property Report</field>
+            <field name="model">estate.property</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">estate.report_estate_property</field>
+            <field name="report_file">estate.report_estate_property</field>
+            <field name="print_report_name">'Estate Property Report - %s' %(object.name)</field>
+            <field name="attachment"/>
+            <field name="binding_model_id" ref="model_estate_property"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <template id="estate.report_estate_property">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="estate.report_estate_property_document" t-lang="doc.buyer_id.lang or 'en_US'"/>
+                </t>
+            </t>
+        </template>
+
+        <template id="report_estate_property_document">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h1>Estate Property Report - <span t-field="doc.name"/></h1>
+                    <h6>Post Code: <span t-field="doc.postcode"/></h6>
+                    <h6>Expected Price: <span t-field="doc.expected_price"/></h6>
+                    <h6>Bedrooms: <span t-field="doc.bedrooms"/></h6>
+                    <h6>Date Availability: <span t-field="doc.date_availability"/></h6>
+                    <h6>Status: <span t-field="doc.state"/></h6>
+                    <br/><br/><br/>
+                    <h3>Offers Received: </h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Partner</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="offers" t-value="doc.estate_property_offer_ids"/>
+                            <t t-foreach="offers" t-as="offer">
+                                <tr>
+                                    <td><span t-field="offer.partner_id"/></td>
+                                    <td><span t-field="offer.price"/></td>
+                                    <td><span t-field="offer.state"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
