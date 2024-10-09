@@ -21,3 +21,8 @@ class EstateProperty(http.Controller):
             models.append(convert_estate_property_to_json(estate_property))
         return request.make_response(json.dumps(models))
 
+    @http.route(version + "/cocktail", type="http", auth="public")
+    def get_cocktail(self):
+        response = requests.get("https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list")
+        return json.dumps(response.json())
+
