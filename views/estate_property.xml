@@ -1,24 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="estate_property_view_tree" model="ir.ui.view">
-        <field name="name">estate.property.view.tree</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <tree string="Estate Property List">
-                <field name="name"/>
-                <field name="estate_property_type_id"/>
-                <field name="postcode"/>
-                <field name="expected_price"/>
-                <field name="selling_price"/>
-                <field name="bedrooms"/>
-                <field name="garage"/>
-                <field name="garden"/>
-                <field name="estate_property_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
-                <field name="date_availability"/>
-                <field name="state"/>
-            </tree>
-        </field>
-    </record>
     <record id="estate_property_view_form" model="ir.ui.view">
         <field name="name">estate.property.view.form</field>
         <field name="model">estate.property</field>
@@ -30,30 +11,37 @@
                     <field name="state" widget="statusbar" statusbar_visible="new,ready,offer_received,offer_accepted,sold,canceled"/>
                 </header>
                 <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <field name="estate_property_tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_quick_create': True}"/>
+                    </div>
                     <group>
                         <group>
                             <field name="estate_property_type_id" options="{'no_create': True, 'no_edit': True}"/>
-                            <field name="name"/>
                             <field name="postcode"/>
-                            <field name="expected_price"/>
-                            <field name="selling_price"/>
-                            <field name="facades"/>
-                            <field name="bedrooms"/>
-                            <field name="estate_property_tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_quick_create': True}"/>
+                            <field name="date_availability"/>
                         </group>
                         <group>
-                            <field name="garage"/>
-                            <field name="garden"/>
-                            <field name="living_area"/>
-                            <field name="garden_area"/>
-                            <field name="total_area"/>
-                            <field name="garden_orientation"/>
-                            <field name="date_availability"/>
+                            <field name="expected_price"/>
+                            <field name="best_offer"/>
+                            <field name="selling_price"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Description">
-                            <field name="description"/>
+                            <group>
+                                <field name="description"/>
+                                <field name="bedrooms"/>
+                                <field name="living_area"/>
+                                <field name="facades"/>
+                                <field name="garage"/>
+                                <field name="garden"/>
+                                <field name="garden_area" invisible="not garden"/>
+                                <field name="garden_orientation" invisible="not garden"/>
+                                <field name="total_area"/>
+                            </group>
                         </page>
                         <page string="PIC and Customer">
                             <group>
@@ -79,6 +67,25 @@
             </form>
         </field>
     </record>
+    <record id="estate_property_view_tree" model="ir.ui.view">
+        <field name="name">estate.property.view.tree</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <tree string="Estate Property List">
+                <field name="name"/>
+                <field name="estate_property_type_id"/>
+                <field name="postcode"/>
+                <field name="expected_price"/>
+                <field name="selling_price"/>
+                <field name="bedrooms"/>
+                <field name="garage"/>
+                <field name="garden"/>
+                <field name="estate_property_tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="date_availability"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
     <record id="estate_property_view_search" model="ir.ui.view">
         <field name="name">estate.property.view.search</field>
         <field name="model">estate.property</field>
@@ -94,6 +101,17 @@
                 <filter name="east_garden" string="East garden" domain="[('garden_orientation', '=', 'E')]"/>
                 <filter name="west_garden" string="West garden" domain="[('garden_orientation', '=', 'W')]"/>
             </search>
+        </field>
+    </record>
+    <record id="estate_property_action" model="ir.actions.act_window">
+        <field name="name">Estate Property</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">estate.property</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click on the create button to create your first property
+            </p>
         </field>
     </record>
 </odoo>
