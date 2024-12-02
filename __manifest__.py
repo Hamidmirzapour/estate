@@ -12,9 +12,9 @@
         This module supports multi-property management, reporting, and seamless integration with Odoo's accounting and CRM modules for a comprehensive business solution.
     """,
     'author': 'Hamid Mirzapour',
-    'category': 'Estate',
+    'category': 'Sales',
     'website': 'https://hamidmirzapour.ir',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'sale'],
     'assets': {},
     'data': [
         'security/ir.model.access.csv',
@@ -22,7 +22,7 @@
         'views/estate_property.xml',
         'views/estate_property_offer.xml',
         'views/estate_property_report.xml',
-        'data/estate.property.csv',
+        # 'data/estate.property.csv',
         'data/estate_property_cron.xml',
         'data/mail_template_data.xml',
     ],
