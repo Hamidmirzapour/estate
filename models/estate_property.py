@@ -4,21 +4,22 @@ from datetime import datetime
 
 class EstateProperty(models.Model):
     _name = "estate.property"
-    _description = "Estate Property"
+    _description = "Estate Property Model"
 
     name = fields.Char(required=True)
     description = fields.Text()
     postcode = fields.Char()
-    date_availability = fields.Date(default=fields.Datetime.now)
+    date_availability = fields.Date(string='Available From', default=fields.Datetime.now)
     expected_price = fields.Float()
+    best_offer = fields.Float()
     selling_price = fields.Float()
     bedrooms = fields.Integer()
-    living_area = fields.Integer()
+    living_area = fields.Integer(string='Living Area (sqm)')
     facades = fields.Integer()
     garage = fields.Boolean()
     garden = fields.Boolean()
-    garden_area = fields.Integer()
-    total_area = fields.Integer(compute="_compute_total_area", readonly=True)
+    garden_area = fields.Integer(string='Garden Area (sqm)')
+    total_area = fields.Integer(string='Total Area (sqm)', compute="_compute_total_area", readonly=True)
     garden_orientation = fields.Selection(
         selection=[("N", "North"), ("S", "South"), ("E", "East"), ("W", "West")],
         default="N", string="Garden Orientation"
