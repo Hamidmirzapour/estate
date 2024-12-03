@@ -1,5 +1,8 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 from datetime import timedelta
+
+
 
 class EstatePropertyOffer(models.Model):
     _name = "estate.property.offer"
@@ -27,3 +30,23 @@ class EstatePropertyOffer(models.Model):
                 rec.validity = (rec.deadline - rec.create_date.date()).days
             else:
                 rec.validity = 0
+
+    @api.autovacuum
+    def _clear_unused_offers(self):
+        refused_offers = self.search([('state', '=', 'refused')]).unlink()
+        if refused_offers:
+            refused_offers.unlink()
+
+    @api.model_create_multi
+    def create(self, vals):
+        for rec in vals:
+            if not rec.get('create_date'):
+                rec['create_date'] = fields.Datetime.now()
+        return super(EstatePropertyOffer, self).create(vals)
+
+    @api.constrains('deadline')
+    def _check_deadline(self):
+        for rec in self:
+            if rec.deadline and rec.create_date:
+                if rec.deadline < rec.create_date.date():
+                    raise ValidationError(_('Deadline can not be before create date'))
