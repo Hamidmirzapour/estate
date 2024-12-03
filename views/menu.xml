@@ -1,26 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="estate_property_type_action" model="ir.actions.act_window">
-        <field name="name">Estate Property Type</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">estate.property.type</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <record id="estate_property_tag_action" model="ir.actions.act_window">
-        <field name="name">Estate Property Tag</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">estate.property.tag</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <record id="estate_property_offer_action" model="ir.actions.act_window">
-        <field name="name">Estate Property Offer</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">estate.property.offer</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
     <menuitem id="estate_menu_root" name="Real Estate" web_icon="estate,static/description/icon.png">
         <menuitem id="state_property_root_menu" name="Estate Property">
             <menuitem id="estate_property_menu_action" name="Properies" action="estate_property_action"/>

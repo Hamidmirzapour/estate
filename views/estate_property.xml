@@ -43,24 +43,26 @@
                                 <field name="total_area"/>
                             </group>
                         </page>
-                        <page string="PIC and Customer">
+                        <page string="Offers">
+                            <field name="estate_property_offer_ids">
+                                <tree string="Offers" editable="bottom">
+                                    <field name="price"/>
+                                    <field name="partner_id" options="{'no_create': True, 'no_edit': True}"/>
+                                    <field name="validity"/>
+                                    <field name="deadline"/>
+                                    <field name="state" nolabel="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Other info">
                             <group>
                                 <group>
-                                    <field name="user_id"/>
+                                    <field name="salesman_id"/>
                                 </group>
                                 <group>
                                     <field name="buyer_id"/>
                                 </group>
                             </group>
-                        </page>
-                        <page string="Offers">
-                            <field name="estate_property_offer_ids">
-                                <tree string="Offers" editable="bottom">
-                                    <field name="partner_id" options="{'no_create': True, 'no_edit': True}"/>
-                                    <field name="price"/>
-                                    <field name="state"/>
-                                </tree>
-                            </field>
                         </page>
                     </notebook>
                 </sheet>

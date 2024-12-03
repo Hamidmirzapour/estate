@@ -2,7 +2,7 @@ from odoo import api, fields, models
 
 class EstatePropertyTag(models.Model):
     _name = "estate.property.tag"
-    _description = "Estate Property Tag"
+    _description = "Estate Property Tag Model"
 
     name = fields.Char(required=True)
     color = fields.Integer("Color Index")
