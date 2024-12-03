@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="estate_property_1" model="estate.property">
+            <field name="name">Demo Estate Property 1</field>
+            <field name="estate_property_type_id" ref="estate.estate_property_house_type"/>
+            <field name="estate_property_tag_ids" eval="[(6, 0, [ref('estate_property_rennovated_tag'), ref('estate_property_cozy_tag')])]"/>
+            <field name="state">new</field>
+        </record>
+        <record id="estate_property_2" model="estate.property">
+            <field name="name">Demo Estate Property 2</field>
+            <field name="estate_property_type_id" ref="estate.estate_property_apartment_type"/>
+            <field name="estate_property_tag_ids" eval="[(6, 0, [ref('estate_property_new_tag'), ref('estate_property_cozy_tag')])]"/>
+            <field name="state">ready</field>
+        </record>
+    </data>
+</odoo>

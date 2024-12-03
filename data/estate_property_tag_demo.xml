@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="estate_property_rennovated_tag" model="estate.property.tag">
+            <field name="name">Rennovated</field>
+            <field name="color">1</field>
+        </record>
+        <record id="estate_property_cozy_tag" model="estate.property.tag">
+            <field name="name">Cozy</field>
+            <field name="color">2</field>
+        </record>
+        <record id="estate_property_new_tag" model="estate.property.tag">
+            <field name="name">New</field>
+            <field name="color">3</field>
+        </record>
+        <record id="estate_property_abandoned_tag" model="estate.property.tag">
+            <field name="name">Abandoned</field>
+            <field name="color">4</field>
+        </record>
+    </data>
+</odoo>
