@@ -41,7 +41,7 @@ class EstateProperty(models.Model):
     estate_property_type_id = fields.Many2one("estate.property.type", string="Estate Property Type", required=True)
     estate_property_tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     estate_property_offer_ids = fields.One2many("estate.property.offer", "estate_property_id", string="Offers")
-
+    offers_count = fields.Integer(compute='_compute_offers_count')
     
     _sql_constraints = [
         (
@@ -58,6 +58,20 @@ class EstateProperty(models.Model):
                 raise ValidationError("The expected price should be greater than 0.0")
             if rec.selling_price <= 0.0:
                 raise ValidationError("The selling price should be greater than 0.0")
+
+    @api.depends('estate_property_offer_ids')
+    def _compute_offers_count(self):
+        for rec in self:
+            rec.offers_count = len(rec.estate_property_offer_ids)
+
+    def action_show_offers(self):
+        return {
+            'name': f'{self.name} - Offers',
+            'type': 'ir.actions.act_window',
+            'res_model': 'estate.property.offer',
+            'view_mode': 'tree',
+            'domain': [('estate_property_id', '=', self.id)]
+        }
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
