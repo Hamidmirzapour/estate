@@ -53,12 +53,15 @@
                         </page>
                         <page string="Offers">
                             <field name="estate_property_offer_ids">
-                                <tree string="Offers" editable="bottom">
+                                <tree string="Offers" editable="bottom" decoration-success="state == 'accepted'"
+                                    decoration-danger="state == 'refused'" decoration-warning="state == 'waiting'">
                                     <field name="price"/>
                                     <field name="partner_id" options="{'no_create': True, 'no_edit': True}"/>
                                     <field name="validity"/>
                                     <field name="deadline"/>
-                                    <field name="state" nolabel="1"/>
+                                    <field name="state" readonly="1"/>
+                                    <button name="action_accept_offer" type="object" icon="fa-check"/>
+                                    <button name="action_decline_offer" type="object" icon="fa-times"/>
                                 </tree>
                             </field>
                         </page>

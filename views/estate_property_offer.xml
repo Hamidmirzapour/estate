@@ -26,7 +26,8 @@
         <field name="name">estate.property.offer.view.tree</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <tree string="Estate Property Offers">
+            <tree string="Estate Property Offers" editable="bottom" decoration-success="state == 'accepted'"
+                                    decoration-danger="state == 'refused'" decoration-warning="state == 'waiting'">
                 <field name="price"/>
                 <field name="partner_id" options="{'no_create': True, 'no_edit': True}"/>
                 <field name="validity"/>
@@ -37,7 +38,7 @@
         </field>
     </record>
     <record id="estate_property_offer_action" model="ir.actions.act_window">
-        <field name="name">Estate Property Offer</field>
+        <field name="name">Estate Property Offers</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">estate.property.offer</field>
         <field name="view_mode">tree,form</field>
