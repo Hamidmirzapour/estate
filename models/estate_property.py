@@ -11,7 +11,7 @@ class EstateProperty(models.Model):
     postcode = fields.Char()
     date_availability = fields.Date(string='Available From', default=fields.Datetime.now)
     expected_price = fields.Float()
-    best_offer = fields.Float()
+    best_offer = fields.Float(compute='_compute_best_offer')
     selling_price = fields.Float()
     bedrooms = fields.Integer()
     living_area = fields.Integer(string='Living Area (sqm)')
@@ -51,18 +51,24 @@ class EstateProperty(models.Model):
         )
     ]
 
-    @api.constrains("expected_price", "selling_price")
+    @api.constrains("expected_price")
     def check_prices(self):
         for rec in self:
             if rec.expected_price <= 0.0:
                 raise ValidationError("The expected price should be greater than 0.0")
-            if rec.selling_price <= 0.0:
-                raise ValidationError("The selling price should be greater than 0.0")
 
     @api.depends('estate_property_offer_ids')
     def _compute_offers_count(self):
         for rec in self:
             rec.offers_count = len(rec.estate_property_offer_ids)
+
+    @api.depends('estate_property_offer_ids')
+    def _compute_best_offer(self):
+        for rec in self:
+            if rec.estate_property_offer_ids:
+                rec.best_offer = max(self.estate_property_offer_ids.mapped('price'))
+            else:
+                rec.best_offer = 0
 
     def action_show_offers(self):
         return {
